@@ -1,0 +1,57 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+@font-face {
+    font-family: 'Yekan';
+    src: url('./assets/yekan/Yekan.eot?#') format('eot'), 
+    url('./assets/yekan/Yekan.woff') format('woff'),  
+    url('./assets/yekan/Yekan.ttf') format('truetype');  
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face
+{
+    font-family:'YekanNumber';
+    src: url('./assets/yekan/yekannumbers.eot?#') format('eot'),  
+    url('./assets/yekan/yekannumbers.woff') format('woff'),  
+    url('./assets/yekan/yekannumbers.ttf') format('truetype');  
+}
+
+@font-face {
+    font-family: 'Iranian Sans';
+    src: url('./assets/IranianSans/iranian-sans.ttf')format('ttf'),
+        url('./assets/IranianSans/iranian-sans.otf')format('otf'),
+        url('./assets/IranianSans/iranian-sans.woff')format('woff');
+}
+h1,h2,h3,h4,h5,h6,a,span,strong,label,input,button,div 
+.mat-tab-label, .mat-tab-link{
+    font-family: 'Yekan','YekanNumber' !important;
+}
+a{
+    text-decoration: none;
+    color: blueviolet;
+    font-size: 13px !important;
+}
+a:hover{
+    color: darkslategrey;
+}
+a:visited{
+    color: blueviolet;
+}
+body{
+    margin: 0;
+}
+
+body::-webkit-scrollbar {
+    height: 4px;
+    width: 4px;
+}
+body::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.26);
+}
+.clear-fix{
+    margin-left: 10px;
+    margin-right: 10px;
+}

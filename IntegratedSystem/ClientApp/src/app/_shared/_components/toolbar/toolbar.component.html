@@ -1,0 +1,29 @@
+<mat-toolbar color="primary">
+
+    <span *ngIf="showMenuButton">
+
+        <button mat-button class="sidenav-toggle" (click)="sidenaveToggle.emit()">
+            <mat-icon class="menu-button">menu</mat-icon>
+        </button>
+
+    </span>
+    
+    <h4>{{ title }}</h4>
+
+    <span class="toolbar-fill-remaining-space"></span>
+  
+    <span>
+
+      <button mat-button color="primary" *ngIf="showMenuButton" [routerLink]="['/home']">
+        <mat-icon>home</mat-icon>
+      </button>
+
+      <button mat-button [matMenuTriggerFor]="usermenu" color="primary">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #usermenu="matMenu">
+        <button mat-menu-item><span>{{ currentUser.firstName + ' '+  currentUser.lastName }}</span></button>
+        <button mat-menu-item (click)="onLogout()"><span>خروج از برنامه</span></button>
+      </mat-menu>
+    </span>
+  </mat-toolbar>

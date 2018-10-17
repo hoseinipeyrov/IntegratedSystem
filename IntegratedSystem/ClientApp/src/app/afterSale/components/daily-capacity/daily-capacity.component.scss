@@ -1,0 +1,24 @@
+.toolbar{
+  text-align: left;
+}
+
+table {
+  width: 100%;
+}
+th.mat-header-cell, 
+th.mat-sort-header{
+  text-align: center !important;
+}
+td.mat-cell{
+  text-align: center !important;
+}
+
+th.mat-column-id,
+td.mat-column-id{
+  text-align: right !important;
+  width: 15px;
+}
+
+mat-form-field{
+    width: 100%;
+}

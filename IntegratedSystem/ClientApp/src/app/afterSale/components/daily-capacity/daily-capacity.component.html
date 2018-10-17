@@ -1,0 +1,85 @@
+<mat-card>
+  <mat-card-title>
+    <span>{{ title }}</span>
+  </mat-card-title>
+
+  <mat-card-content>
+    
+      <div class="toolbar">
+        <button mat-icon-button (click)="openDialog()" title="تعئین ظرفیت">
+          <mat-icon>playlist_add</mat-icon>
+        </button>
+      </div>
+
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="جستجو">
+    </mat-form-field>
+
+
+    <table mat-table #table [dataSource]="dataSource" matSort>
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> <span>عملیات</span> </th>
+        <td mat-cell *matCellDef="let element">
+
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+
+          <mat-menu #menu="matMenu">
+
+            <button mat-menu-item>
+              <mat-icon>details</mat-icon>
+              <span>مشاهده جزئیات</span>
+            </button>
+
+            <button mat-menu-item>
+              <mat-icon>edit</mat-icon>
+              <span>وایرایش</span>
+            </button>
+
+            <button mat-menu-item disabled>
+              <mat-icon>delete</mat-icon>
+              <span>حذف</span>
+            </button>
+
+          </mat-menu>
+        </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef> <span>تاریخ</span> </th>
+        <td mat-cell *matCellDef="let element"> <span> {{element.date}} </span> </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="total">
+        <th mat-header-cell *matHeaderCellDef> <span>تعداد کل</span> </th>
+        <td mat-cell *matCellDef="let element"> <span> {{element.total}} </span> </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="reserved">
+        <th mat-header-cell *matHeaderCellDef> <span>رزرو شده</span> </th>
+        <td mat-cell *matCellDef="let element"> <span> {{element.reserved}} </span> </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="used">
+        <th mat-header-cell *matHeaderCellDef> <span>استفاده شده</span> </th>
+        <td mat-cell *matCellDef="let element"> <span> {{element.used}}</span> </td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>
+
+    <mat-paginator #paginator [pageSize]="7" [pageSizeOptions]="[7, 14, 21, 28, 31]" [showFirstLastButtons]="true">
+    </mat-paginator>
+
+  </mat-card-content>
+
+</mat-card>

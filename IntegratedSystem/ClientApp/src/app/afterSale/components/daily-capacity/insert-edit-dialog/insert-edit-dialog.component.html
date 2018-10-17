@@ -1,0 +1,54 @@
+<h3 mat-dialog-title>{{dialogData.title}}</h3>
+<div mat-dialog-content>
+
+  <mat-form-field class="date-picker">
+    <input matInput [matDatepicker]="pickerFrom" placeholder="تاریخ شروع" disabled>
+    <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+    <mat-datepicker #pickerFrom [disabled]="false"></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field class="date-picker">
+    <input matInput [matDatepicker]="pickerTo" placeholder="تاریخ پایان" disabled>
+    <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+    <mat-datepicker #pickerTo [disabled]="false"></mat-datepicker>
+  </mat-form-field> 
+
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="جستجو">
+  </mat-form-field>
+
+  <div class="container">
+    <table mat-table [dataSource]="dataSource">
+
+      <ng-container matColumnDef="row">
+        <th mat-header-cell *matHeaderCellDef> <span>#</span> </th>
+        <td mat-cell *matCellDef="let element"> <span></span></td>
+      </ng-container>
+
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef> <span>عنوان</span> </th>
+        <td mat-cell *matCellDef="let element"> <span>{{element.title}}</span> </td>
+      </ng-container>
+
+      <ng-container matColumnDef="count">
+        <th mat-header-cell *matHeaderCellDef> <span>تعداد</span> </th>
+        <td mat-cell *matCellDef="let element">
+          <mat-form-field class="input-data">
+            <input matInput [(ngModel)]="element.count" #count="ngModel" type="number" placeholder="" required>
+            <span *ngIf="(count.invalid || count.empty) && (count.dirty || count.touched)">
+              الزامی
+            </span>
+          </mat-form-field>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="onNoClick()">لغو</button>
+  <button mat-raised-button (click)="onYesClick()" color="primary" cdkFocusInitial>تائید</button>
+</div>

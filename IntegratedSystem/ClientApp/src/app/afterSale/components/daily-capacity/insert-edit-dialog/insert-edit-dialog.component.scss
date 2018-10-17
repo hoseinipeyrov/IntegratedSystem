@@ -1,0 +1,45 @@
+
+.date-picker{
+  width: 120px;
+  margin-left: 20px;
+}
+
+.search-bar{
+  width: 330px;
+}
+.input-data{
+  width: 70px;
+}
+
+table {
+  width: 100%;
+}
+
+th.mat-header-cell,
+th.mat-sort-header {
+  text-align: right !important;
+  padding-right: 10px;
+}
+
+td.mat-cell {
+  text-align: right !important;
+}
+
+td.mat-column-row {
+  width: 40px;
+  padding-right: 10px;
+}
+
+td.mat-column-count{
+    width: 40px;
+    padding-left: 20px;
+}
+
+td.mat-column-title {
+  width: 700px;
+  padding-right: 8px;
+}
+
+mat-form-field {
+  width: 100%;
+}

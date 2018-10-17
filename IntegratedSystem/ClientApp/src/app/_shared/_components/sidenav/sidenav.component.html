@@ -1,0 +1,33 @@
+<ngx-loading-bar></ngx-loading-bar>
+<mat-drawer-container class="app-sidenav-container" autosize dir="rtl">
+    <mat-drawer #drawer class="app-sidenav mat-elevation-z10" 
+        [opened]="!isScreenSmall()" 
+        [mode]="isScreenSmall()? 'over':'side'"
+        *ngIf="sideNavOptions.menus != null">
+        <mat-toolbar color="primary">
+            <h4>{{sideNavOptions.appTitle}}</h4>
+        </mat-toolbar>
+
+        <mat-accordion displayMode='flat'>
+
+            <mat-expansion-panel *ngFor="let menu of sideNavOptions.menus">
+                <mat-expansion-panel-header>
+                    <span>{{menu.title}}</span>
+                </mat-expansion-panel-header>
+                <mat-list role="list" *ngFor="let menuItem of menu.menuItems">
+                    <mat-list-item role="listitem" *ngIf="menuItem.status">
+                        <a matLine [routerLink]="menuItem.link">{{ menuItem.title}}</a>
+                    </mat-list-item>
+                </mat-list>
+            </mat-expansion-panel>
+
+        </mat-accordion>
+    </mat-drawer>
+
+    <div class="app-sidenav-content" dir="rtl">
+        <app-toolbar (sidenaveToggle)="drawer.toggle()" [showMenuButton]="sideNavOptions.menus != null" [title]="sideNavOptions.toolbarTitle"></app-toolbar>
+        <div class="wrapper">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</mat-drawer-container>
