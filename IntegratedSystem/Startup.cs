@@ -67,13 +67,13 @@ namespace IntegratedSystem
                         {
                             return Task.CompletedTask;
                         },
-                        OnTokenValidated = context =>
+                        OnTokenValidated = context => //2
                         {
                             var tokenValidatorService = context.HttpContext.RequestServices.GetRequiredService<ITokenValidatorService>();
 
                             return tokenValidatorService.ValidateAsync(context);
                         },
-                        OnMessageReceived = context =>
+                        OnMessageReceived = context => //1
                         {
                             return Task.CompletedTask;
                         },
@@ -85,7 +85,7 @@ namespace IntegratedSystem
                 });
 
             services.AddScoped<IUserService, UserServices>();
-            services.AddSingleton<ITokenValidatorService, TokenValidatorService>();
+            services.AddScoped<ITokenValidatorService, TokenValidatorService>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
