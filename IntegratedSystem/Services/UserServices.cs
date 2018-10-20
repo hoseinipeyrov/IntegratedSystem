@@ -16,6 +16,8 @@ namespace IntegratedSystem.Services
 {
     public interface IUserService
     {
+        User GetUser(int id);
+        User GetUser(string userName);
         User Login(string username, string password);
     }
     public class UserServices : IUserService
@@ -33,6 +35,27 @@ namespace IntegratedSystem.Services
                 new User{Id=2456, FirstName="وحید", LastName="احمدوند" , UserName="vahid", Password="12345"}
             };
 
+        }
+
+        public User GetUser(int id)
+        {
+            var user = _user.Find(t => t.Id == id);
+
+            if (user == null)
+                throw new NullReferenceException("user not fount");
+
+            return user;
+        }
+
+        public User GetUser(string userName)
+        {
+            var name = userName.ToLower().Trim();
+            var user = _user.Find(t => t.UserName == name);
+
+            if (user == null)
+                throw new NullReferenceException("user not fount");
+
+            return user;
         }
 
         public User Login(string username, string password)
@@ -67,6 +90,7 @@ namespace IntegratedSystem.Services
                 throw;
             }
         }
+
 
     }
 }

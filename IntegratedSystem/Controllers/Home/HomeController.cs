@@ -17,7 +17,7 @@ namespace IntegratedSystem.Controllers.Home {
         
         [HttpGet]
         public IActionResult Index () {
-            var a = HttpContext.Session;
+
             return Ok (new Option {
                 AppTitle = "صفحه اصلی",
                     ToolbarTitle = "دفتر مرکزی",

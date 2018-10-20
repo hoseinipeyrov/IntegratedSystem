@@ -20,7 +20,6 @@ import { TilesComponent } from './components/tiles/tiles.component';
     TilesComponent
   ],
   providers: [
-    AuthenticationService,
     HomeService
   ]
 })

@@ -14,7 +14,7 @@ const appRouts: Routes =[
   { path: 'part-sale', loadChildren: './partSale/part-sale.module#PartSaleModule', canActivate: [AuthGuard] },
   { path: 'home', loadChildren: './home/home.module#HomeModule', canActivate: [AuthGuard]},
   { path: 'users', loadChildren: './account/account.module#AccountModule' },
-  { path: '**', redirectTo:'' }
+  { path: '**', redirectTo:'home',pathMatch:'full', }
 ];
 
 @NgModule({

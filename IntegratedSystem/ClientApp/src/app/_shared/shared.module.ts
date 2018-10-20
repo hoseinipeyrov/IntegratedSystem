@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ModuleWithProviders } from '@angular/compiler/src/core';
 import { JwtInterceptor } from './_helpers/JwtInterceptor';
+import { AuthenticationService } from './_services/authentication.service';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ export class SharedModule {
     return {
       ngModule: SharedModule,
       providers: [
+        AuthenticationService,
         { provide: MAT_DATE_LOCALE, useValue: 'fa-IR' },
         { provide: DateAdapter, useClass: MaterialPersianDateAdapter, deps: [MAT_DATE_LOCALE] },
         { provide: MAT_DATE_FORMATS, useValue: PERSIAN_DATE_FORMATS },

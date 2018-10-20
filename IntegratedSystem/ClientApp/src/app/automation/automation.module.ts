@@ -6,6 +6,8 @@ import { AutomationRoutingModule } from './automation-routing.module';
 
 import { AutomationComponent } from './automation.component';
 import { DepartmentComponent } from './components/department/department.component';
+import { AutomationService } from './services/automation.service';
+import { AuthenticationService } from '../_shared/_services/authentication.service';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,9 @@ import { DepartmentComponent } from './components/department/department.componen
     CommonModule,
     SharedModule.forRoot(),
     AutomationRoutingModule
+  ],
+  providers:[
+    AutomationService
   ],
   exports:[]
 })

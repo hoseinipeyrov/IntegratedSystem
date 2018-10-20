@@ -9,13 +9,13 @@ namespace IntegratedSystem.Model
     {
         public string AppTitle { get; set; }
         public string ToolbarTitle { get; set; }
-        public Menus[] Menus { get; set; }
+        public List<Menus> Menus { get; set; }
     }
 
     public class Menus
     {
         public string Title { get; set; }
-        public MenuItems[] MenuItems { get; set; }
+        public List<MenuItems> MenuItems { get; set; }
     }
 
     public class MenuItems

@@ -104,6 +104,7 @@ namespace IntegratedSystem
 
             app.UseAuthentication();
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
             app.UseSpaStaticFiles();
             app.UseMvcWithDefaultRoute();
             app.UseCors(x => {
