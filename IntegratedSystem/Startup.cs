@@ -31,13 +31,14 @@ namespace IntegratedSystem
             var key = Encoding.ASCII.GetBytes(appSettings.Secret);
             services.Configure<AppSettings>(appSettingsSection);
 
-            var authorize = new AuthorizationPolicyBuilder()
-                .RequireAuthenticatedUser()
-                .Build();
 
             services.AddCors();
             services.AddMvc(config =>
             {
+                var authorize = new AuthorizationPolicyBuilder()
+                .RequireAuthenticatedUser()
+                .Build();
+
                 config.Filters.Add(new AuthorizeFilter(authorize));
             });
             services.AddSpaStaticFiles(configuration =>
@@ -51,41 +52,42 @@ namespace IntegratedSystem
                 conf.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
             })
             .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
                 {
-                    x.RequireHttpsMetadata = false;
-                    x.SaveToken = true;
-                    x.TokenValidationParameters = new TokenValidationParameters
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+                x.Events = new JwtBearerEvents
+                {
+                    OnAuthenticationFailed = context =>
                     {
-                        ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(key),
-                        ValidateIssuer = false,
-                        ValidateAudience = false
-                    };
-                    x.Events = new JwtBearerEvents
+                        return Task.CompletedTask;
+                    },
+                    OnTokenValidated = context =>
                     {
-                        OnAuthenticationFailed = context =>
-                        {
-                            return Task.CompletedTask;
-                        },
-                        OnTokenValidated = context =>
-                        {
-                            var tokenValidatorService = context.HttpContext.RequestServices.GetRequiredService<ITokenValidatorService>();
+                        var tokenValidatorService = context.HttpContext.RequestServices
+                            .GetRequiredService<ITokenValidatorService>();
 
-                            return tokenValidatorService.ValidateAsync(context);
-                        },
-                        OnMessageReceived = context =>
-                        {
-                            return Task.CompletedTask;
-                        },
-                        OnChallenge = context =>
-                        {
-                            return Task.CompletedTask;
-                        }
-                    };
-                });
+                        return tokenValidatorService.ValidateAsync(context);
+                    },
+                    OnMessageReceived = context =>
+                    {
+                        return Task.CompletedTask;
+                    },
+                    OnChallenge = context =>
+                    {
+                        return Task.CompletedTask;
+                    }
+                };
+            });
 
             services.AddScoped<IUserService, UserServices>();
-            services.AddSingleton<ITokenValidatorService, TokenValidatorService>();
+            services.AddScoped<ITokenValidatorService, TokenValidatorService>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -102,16 +104,14 @@ namespace IntegratedSystem
 
             app.UseAuthentication();
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
             app.UseSpaStaticFiles();
-            app.UseMvc();
-
-            app.UseCors(x => x
-                .AllowAnyOrigin()
+            app.UseMvcWithDefaultRoute();
+            app.UseCors(x => {
+                x.AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader()
-                .AllowCredentials());
-
+                .AllowCredentials();
+            });
             app.UseSpa(spa =>
             {
                 spa.Options.SourcePath = "ClientApp";

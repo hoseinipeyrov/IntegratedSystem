@@ -22,7 +22,7 @@ export class AuthenticationService {
   login(userName: string, password: string): Observable<IUser> {
 
     let data = { UserName: userName, Password: password };
-    return this.http.post<IUser>('api/users/login', null, { params: data })
+    return this.http.post<IUser>('api/users/login', data)
       .pipe(map(user => {
 
         if (user && user.token) {
@@ -51,13 +51,5 @@ export class AuthenticationService {
     }
 
     return null;
-  }
-
-  changePassword(old: string, pass: string, confirm: string) {
-
-  }
-
-  forgetPassword(email: string) {
-
   }
 }

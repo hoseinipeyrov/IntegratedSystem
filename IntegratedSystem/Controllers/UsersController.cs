@@ -26,7 +26,7 @@ namespace IntegratedSystem.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public IActionResult Login(LoginModel model)
+        public IActionResult Login([FromBody]LoginModel model)
         {
             try
             {

@@ -10,15 +10,13 @@ namespace IntegratedSystem.Services
 
     public class TokenValidatorService : ITokenValidatorService
     {
-        private readonly ITokenValidatorService _tokenValidatorService;
+        public TokenValidatorService()
+        {
 
-        public TokenValidatorService(ITokenValidatorService tokenValidatorService)
-        {
-            _tokenValidatorService = tokenValidatorService;
         }
-        public async Task ValidateAsync(TokenValidatedContext context)
+        public Task ValidateAsync(TokenValidatedContext context)
         {
-            
+            return Task.CompletedTask;
         }
     }
 }
