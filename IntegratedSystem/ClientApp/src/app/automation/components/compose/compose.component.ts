@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { Subject } from 'rxjs';
+import { min } from 'rxjs/operators';
+import { max } from 'jalali-moment';
 
 @Component({
   selector: 'app-compose',
@@ -7,8 +11,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ComposeComponent implements OnInit {
 
-  constructor() { }
-  title:string = 'ارسال نامه';
+  constructor(fb: FormBuilder) {
+    this.form = fb.group({
+      followUpDate: new FormControl(""),
+      isSecret: new FormControl("0", Validators.required),
+      message: new FormControl("", [Validators.required]),
+      priority: new FormControl("0", Validators.required),
+      subject: new FormControl("", [Validators.required, Validators.minLength(10), Validators.maxLength(100)]),
+    });
+  }
+
+  title: string = 'ارسال نامه';
+  form: FormGroup;
+  
   ngOnInit() {
   }
 
