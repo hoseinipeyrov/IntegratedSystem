@@ -70,7 +70,8 @@ namespace IntegratedSystem
                         },
                         OnTokenValidated = context =>
                         {
-                            var tokenValidatorService = context.HttpContext.RequestServices.GetRequiredService<ITokenValidatorService>();
+                            var tokenValidatorService = context.HttpContext.RequestServices
+                            .GetRequiredService<ITokenValidatorService>();
 
                             return tokenValidatorService.ValidateAsync(context);
                         },
