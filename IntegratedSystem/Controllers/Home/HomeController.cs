@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using IntegratedSystem.Model;
-using IntegratedSystem.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ViewModels;
 
 namespace IntegratedSystem.Controllers.Home {
     [Authorize]
@@ -18,7 +17,7 @@ namespace IntegratedSystem.Controllers.Home {
         [HttpGet]
         public IActionResult Index () {
 
-            return Ok (new Option {
+            return Ok (new Settings {
                 AppTitle = "صفحه اصلی",
                     ToolbarTitle = "دفتر مرکزی",
                     Menus = null

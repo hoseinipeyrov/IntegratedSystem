@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assemblies", "Assemblies", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{D61BE62A-25CF-4EE5-8447-4A231F7FAF52}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModels", "ViewModel\ViewModels.csproj", "{EE78882E-4C3B-435E-9A5E-CF21F67E1205}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,12 +25,17 @@ Global
 		{D61BE62A-25CF-4EE5-8447-4A231F7FAF52}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D61BE62A-25CF-4EE5-8447-4A231F7FAF52}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D61BE62A-25CF-4EE5-8447-4A231F7FAF52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE78882E-4C3B-435E-9A5E-CF21F67E1205}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE78882E-4C3B-435E-9A5E-CF21F67E1205}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE78882E-4C3B-435E-9A5E-CF21F67E1205}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE78882E-4C3B-435E-9A5E-CF21F67E1205}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D61BE62A-25CF-4EE5-8447-4A231F7FAF52} = {E152E8C7-A465-4257-B97E-BBD22FBF6DB8}
+		{EE78882E-4C3B-435E-9A5E-CF21F67E1205} = {E152E8C7-A465-4257-B97E-BBD22FBF6DB8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {61D3D4BC-0382-4914-8DE0-9C4A6681DDBF}

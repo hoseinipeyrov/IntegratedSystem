@@ -6,11 +6,11 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using IntegratedSystem.Model;
-using IntegratedSystem.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Services.Users;
+using ViewModels.Users;
 
 namespace IntegratedSystem.Controllers
 {

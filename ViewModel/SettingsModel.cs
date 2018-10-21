@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace IntegratedSystem.Model
+namespace ViewModels
 {
-    public class Option
+    public class Settings
     {
         public string AppTitle { get; set; }
         public string ToolbarTitle { get; set; }

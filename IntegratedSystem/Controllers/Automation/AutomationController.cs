@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using IntegratedSystem.Model;
-using IntegratedSystem.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Services.Users;
+using ViewModels;
 
 namespace IntegratedSystem.Controllers.Automation
 {
@@ -23,14 +23,14 @@ namespace IntegratedSystem.Controllers.Automation
 
 
         [HttpGet]
-        public Option GetMenus()
+        public Settings GetMenus()
         {
             var claim = HttpContext.User.Claims
                 .FirstOrDefault(t=> t.Type == ClaimTypes.NameIdentifier);
 
             var user = _userService.GetUser(int.Parse(claim.Value));
             
-            return new Option
+            return new Settings
             {
                 AppTitle = "اتوماسیون و مکاتبات",
                 ToolbarTitle = $"{user.FirstName} {user.LastName}",
