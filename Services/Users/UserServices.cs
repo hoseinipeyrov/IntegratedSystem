@@ -12,14 +12,14 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IntegratedSystem.Services
+namespace Services.Users
 {
     public interface IUserService
     {
         User GetUser(int id);
-        User GetUser(string userName);
         User Login(string username, string password);
     }
+
     public class UserServices : IUserService
     {
         private readonly AppSettings _appSettings;
@@ -47,17 +47,6 @@ namespace IntegratedSystem.Services
             return user;
         }
 
-        public User GetUser(string userName)
-        {
-            var name = userName.ToLower().Trim();
-            var user = _user.Find(t => t.UserName == name);
-
-            if (user == null)
-                throw new NullReferenceException("user not fount");
-
-            return user;
-        }
-
         public User Login(string username, string password)
         {
             try
@@ -75,7 +64,7 @@ namespace IntegratedSystem.Services
                         new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                         new Claim(ClaimTypes.Name, user.UserName),
                     }),
-                    Expires = DateTime.UtcNow.AddMinutes(1),
+                    Expires = DateTime.UtcNow.AddMinutes(30),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
                 };
                 var token = tokenHandler.CreateToken(tokenDescriptor);

@@ -1,5 +1,3 @@
-using IntegratedSystem.Helpers;
-using IntegratedSystem.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -9,6 +7,9 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Services;
+using Services.Security;
+using Services.Users;
 using System.Text;
 using System.Threading.Tasks;
 

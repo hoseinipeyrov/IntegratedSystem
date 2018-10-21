@@ -8,7 +8,7 @@ import { AuthGuard } from './_shared/_services/guard.service';
 
 const appRouts: Routes =[
   //component:AppComponent 
-  { path: '', redirectTo:'home', pathMatch:'full', canActivate: [AuthGuard] },
+  { path: '', redirectTo:'automation', pathMatch:'full', canActivate: [AuthGuard] },
   { path: 'after-sale', loadChildren: './afterSale/after-sale.module#AfterSaleModule', canActivate: [AuthGuard]  },
   { path: 'automation', loadChildren: './automation/automation.module#AutomationModule', canActivate: [AuthGuard] },
   { path: 'part-sale', loadChildren: './partSale/part-sale.module#PartSaleModule', canActivate: [AuthGuard] },

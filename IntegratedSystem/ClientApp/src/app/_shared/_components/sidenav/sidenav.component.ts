@@ -55,4 +55,5 @@ export interface MenuItems {
   title : string;
   link : string;
   status: boolean;
+  icon: string;
 }

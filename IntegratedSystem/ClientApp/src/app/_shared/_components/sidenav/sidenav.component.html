@@ -16,7 +16,10 @@
                 </mat-expansion-panel-header>
                 <mat-list role="list" *ngFor="let menuItem of menu.menuItems">
                     <mat-list-item role="listitem" *ngIf="menuItem.status">
-                        <a matLine [routerLink]="menuItem.link">{{ menuItem.title}}</a>
+                        <a matLine [routerLink]="menuItem.link">
+                          <mat-icon>{{ menuItem.icon }}</mat-icon>
+                          {{ menuItem.title}}
+                        </a>
                     </mat-list-item>
                 </mat-list>
             </mat-expansion-panel>

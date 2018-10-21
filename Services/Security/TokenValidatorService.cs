@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Threading.Tasks;
 
-namespace IntegratedSystem.Services
+namespace Services.Security
 {
     public interface ITokenValidatorService
     {

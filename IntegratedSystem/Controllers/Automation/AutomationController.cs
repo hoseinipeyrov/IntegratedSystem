@@ -43,7 +43,20 @@ namespace IntegratedSystem.Controllers.Automation
                         {
                             new MenuItems{Link="/automation/department", Title="چارت سازمانی", Status =true}
                         }
-                    }
+                    },
+                    new Menus
+                    {
+                        Title = "کارتابل نامه ها",
+                        MenuItems = new List<MenuItems>
+                        {
+                            new MenuItems{Icon = "mail",      Status =true, Link="/automation/compose",  Title="ارسال نامه"},
+                            new MenuItems{Icon = "archive",   Status =true, Link="/automation/inbox",    Title="نامه های دریافتی"},
+                            new MenuItems{Icon = "unarchive", Status =true, Link="/automation/outbox",   Title="نامه های ارسالی"},
+                            new MenuItems{Icon = "drafts",    Status =true, Link="/automation/drafts",   Title="پیش نویس ها"},
+                            new MenuItems{Icon = "bookmarks", Status =true, Link="/automation/category", Title="دسته بندی ها"},
+                        }
+                    },
+
                 }
             };
         }
