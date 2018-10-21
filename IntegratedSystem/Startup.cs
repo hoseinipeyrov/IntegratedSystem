@@ -52,39 +52,38 @@ namespace IntegratedSystem
                 conf.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
             })
             .AddJwtBearer(x =>
-            {
-                x.RequireHttpsMetadata = false;
-                x.SaveToken = true;
-                x.TokenValidationParameters = new TokenValidationParameters
                 {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = false,
-                    ValidateAudience = false
-                };
-                x.Events = new JwtBearerEvents
-                {
-                    OnAuthenticationFailed = context =>
+                    x.RequireHttpsMetadata = false;
+                    x.SaveToken = true;
+                    x.TokenValidationParameters = new TokenValidationParameters
                     {
-                        return Task.CompletedTask;
-                    },
-                    OnTokenValidated = context =>
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(key),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
+                    x.Events = new JwtBearerEvents
                     {
-                        var tokenValidatorService = context.HttpContext.RequestServices
-                            .GetRequiredService<ITokenValidatorService>();
+                        OnAuthenticationFailed = context =>
+                        {
+                            return Task.CompletedTask;
+                        },
+                        OnTokenValidated = context =>
+                        {
+                            var tokenValidatorService = context.HttpContext.RequestServices.GetRequiredService<ITokenValidatorService>();
 
-                        return tokenValidatorService.ValidateAsync(context);
-                    },
-                    OnMessageReceived = context =>
-                    {
-                        return Task.CompletedTask;
-                    },
-                    OnChallenge = context =>
-                    {
-                        return Task.CompletedTask;
-                    }
-                };
-            });
+                            return tokenValidatorService.ValidateAsync(context);
+                        },
+                        OnMessageReceived = context =>
+                        {
+                            return Task.CompletedTask;
+                        },
+                        OnChallenge = context =>
+                        {
+                            return Task.CompletedTask;
+                        }
+                    };
+                });
 
             services.AddScoped<IUserService, UserServices>();
             services.AddScoped<ITokenValidatorService, TokenValidatorService>();
