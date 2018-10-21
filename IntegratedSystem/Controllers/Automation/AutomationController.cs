@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using IntegratedSystem.Model;
 using IntegratedSystem.Services;
@@ -24,7 +25,10 @@ namespace IntegratedSystem.Controllers.Automation
         [HttpGet]
         public Option GetMenus()
         {
-            var user = _userService.GetUser(HttpContext.User.Identity.Name);
+            var claim = HttpContext.User.Claims
+                .FirstOrDefault(t=> t.Type == ClaimTypes.NameIdentifier);
+
+            var user = _userService.GetUser(int.Parse(claim.Value));
             
             return new Option
             {
