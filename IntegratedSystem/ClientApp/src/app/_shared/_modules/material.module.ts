@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CdkTableModule} from '@angular/cdk/table';
 import {CdkTreeModule} from '@angular/cdk/tree';
+import { CKEditorModule } from 'ngx-ckeditor';
 
 import {
   MatAutocompleteModule,
@@ -78,6 +79,7 @@ import {
     MatTooltipModule,
     MatTreeModule,
     MatNativeDateModule,
+    CKEditorModule,
   ],
   imports: [
   ],

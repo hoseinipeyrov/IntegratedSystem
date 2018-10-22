@@ -15,6 +15,7 @@
           <div class="toolbar"></div>
           <div class="content">
             <form class="example-container" [formGroup]="form">
+
               <div>
 
                 <mat-form-field>
@@ -33,17 +34,37 @@
                 </mat-form-field>
 
               </div>
+
               <div>
+
+                  <mat-form-field [ngStyle]="{'width':'100%'}">
+                    <mat-select #receivers placeholder="گیرندگان" formControlName="receivers" multiple (selectionChange)="itemClicked(search.value)">
+                      <input #search matInput 
+                        [ngStyle]="{'width':'99%', 'padding' :'3px'}" 
+                        placeholder="جستجو..." 
+                        (keyup)="receiverFilter(search.value)">
+                      <mat-option 
+                        *ngFor="let item of items"
+                        [value]="item.Value" >{{ item.Text}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+              </div>
+
+              <div>
+
                 <mat-form-field [ngStyle]="{'width':'100%'}">
                   <input matInput placeholder="عنوان نامه را وارد کنید" formControlName="subject">
                 </mat-form-field>
+
               </div>
+
               <div>
-                <!-- rich text box -->
-                <mat-form-field [ngStyle]="{'width':'100%'}">
-                  <textarea matInput placeholder="متن نامه را اینجا بنویسید..." formControlName="message"></textarea>
-                </mat-form-field>
+
+                <ck-editor [config]="{}" language="fa" [fullPage]="true" formControlName="message"></ck-editor>
+
               </div>
+
             </form>
           </div>
         </div>
