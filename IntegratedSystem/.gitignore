@@ -25,7 +25,7 @@ bin/
 Bin/
 obj/
 Obj/
-
+clientApp/dist
 # Visual Studio 2015 cache/options directory
 .vs/
 

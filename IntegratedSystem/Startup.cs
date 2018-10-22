@@ -97,11 +97,6 @@ namespace IntegratedSystem
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                app.UseExceptionHandler("/Error");
-                app.UseHsts();
-            }
 
             app.UseAuthentication();
             app.UseHttpsRedirection();
