@@ -18,36 +18,11 @@
 
               <div>
 
-                <mat-form-field>
-                  <mat-select placeholder="فوریت نامه" formControlName="priority">
-                    <mat-option value="0">عادی</mat-option>
-                    <mat-option value="1">فوری</mat-option>
-                    <mat-option value="2">اضطراری</mat-option>
-                  </mat-select>
+                <mat-form-field [ngStyle]="{'width':'100%'}">
+                  <input matInput placeholder="برای وارد کردن اسامی گیرندگان روی آیکون مقابل کلیک کنید"  formControlName="receivers" readonly>
+                  <mat-icon matSuffix title="گیرندگان" style="cursor: pointer; color: green" (click)="openContact()">personal</mat-icon>
+                  <mat-icon matSuffix title="گیرندگان رونوشت" style="cursor: pointer; color: green" (click)="openContact()">person_outline</mat-icon>
                 </mat-form-field>
-
-                <mat-form-field>
-                  <input matInput [matDatepicker]="pickerTo" formControlName="followUpDate" placeholder="تاریخ پیگیری"
-                    readonly>
-                  <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
-                  <mat-datepicker #pickerTo [disabled]="false"></mat-datepicker>
-                </mat-form-field>
-
-              </div>
-
-              <div>
-
-                  <mat-form-field [ngStyle]="{'width':'100%'}">
-                    <mat-select #receivers placeholder="گیرندگان" formControlName="receivers" multiple (selectionChange)="itemClicked(search.value)">
-                      <input #search matInput 
-                        [ngStyle]="{'width':'99%', 'padding' :'3px'}" 
-                        placeholder="جستجو..." 
-                        (keyup)="receiverFilter(search.value)">
-                      <mat-option 
-                        *ngFor="let item of items"
-                        [value]="item.Value" >{{ item.Text}}</mat-option>
-                    </mat-select>
-                  </mat-form-field>
 
               </div>
 
@@ -59,11 +34,37 @@
 
               </div>
 
-              <div>
+              <div style="margin-bottom:15px;">
 
-                <ck-editor [config]="{}" language="fa" [fullPage]="true" formControlName="message"></ck-editor>
+                <ck-editor language="fa" [fullPage]="true" formControlName="message"></ck-editor>
 
               </div>
+
+              <div>
+
+                  <mat-form-field class="">
+                    <mat-select placeholder="اولویت نامه" formControlName="priority">
+                      <mat-option [value]="0">عادی</mat-option>
+                      <mat-option [value]="1">فوری</mat-option>
+                      <mat-option [value]="2">اضطراری</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+  
+                  <mat-form-field>
+                    <input matInput [matDatepicker]="pickerTo" formControlName="followUpDate" placeholder="تاریخ پیگیری"
+                      readonly>
+                    <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerTo [disabled]="false"></mat-datepicker>
+                  </mat-form-field>
+  
+                  <mat-form-field>
+                    <mat-select placeholder="طبقه بندی" formControlName="isSecret">
+                      <mat-option [value]="0">عادی</mat-option>
+                      <mat-option [value]="1">محرمانه</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+  
+                </div>
 
             </form>
           </div>

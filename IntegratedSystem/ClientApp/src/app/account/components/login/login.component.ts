@@ -1,3 +1,4 @@
+import { MatSnackBar } from '@angular/material';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { AuthenticationService } from '../../../_shared/_services/authentication.service';
@@ -17,6 +18,7 @@ export class LoginComponent implements OnInit {
   hidePassword: boolean = false;
 
   constructor(
+    public snackBar: MatSnackBar,
     private formBuilder: FormBuilder,
     private authenticateSrvice: AuthenticationService,
     private route: ActivatedRoute,
@@ -52,7 +54,8 @@ export class LoginComponent implements OnInit {
         },
         error => {
           this.isDisabled = false;
-          alert(error.error.message);
+          this.snackBar.open(error.error.message, null, { duration: 3000, direction: 'rtl'});
+          //alert(error.error.message);
         }
       );
   }

@@ -5,7 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Automation\" />
+    <Compile Remove="Automation\**" />
+    <EmbeddedResource Remove="Automation\**" />
+    <None Remove="Automation\**" />
   </ItemGroup>
 
 </Project>

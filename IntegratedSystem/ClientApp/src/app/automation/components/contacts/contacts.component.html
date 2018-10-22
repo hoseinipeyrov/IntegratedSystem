@@ -1,0 +1,21 @@
+<h3 mat-dialog-title>{{dialogData.title}}</h3>
+<div mat-dialog-content>
+  <mat-form-field style="width: 100%">
+    <input #search matInput placeholder="جستجو..." (keyup)="filterList(search.value)">
+  </mat-form-field>
+  <div style="overflow-y: auto; max-height: 300px; min-height: 300px;">
+    <mat-selection-list #contacts>
+      <mat-list-option #option *ngFor="let item of filtered" 
+        [value]="item.id" 
+        [selected]=item.selected 
+        (click)= "checkedItem(option.value, option.selected)">
+
+        <span>{{ item.name }}</span>
+      </mat-list-option>
+    </mat-selection-list>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="onNoClick()">لغو</button>
+  <button mat-raised-button (click)="onYesClick()" color="primary" cdkFocusInitial>تائید</button>
+</div>

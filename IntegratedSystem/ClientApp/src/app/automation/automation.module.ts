@@ -12,6 +12,7 @@ import { InboxComponent } from './components/inbox/inbox.component';
 import { SentComponent } from './components/sent/sent.component';
 import { DraftsComponent } from './components/drafts/drafts.component';
 import { SearchComponent } from './components/search/search.component';
+import { ContactsComponent } from './components/contacts/contacts.component';
 
 @NgModule({
   declarations: [
@@ -21,12 +22,17 @@ import { SearchComponent } from './components/search/search.component';
     InboxComponent,
     SentComponent,
     DraftsComponent,
-    SearchComponent
+    SearchComponent,
+    ContactsComponent
   ],
   imports: [
     CommonModule,
     SharedModule.forRoot(),
     AutomationRoutingModule
+  ],
+  entryComponents:[
+    ComposeComponent,
+    ContactsComponent,
   ],
   providers:[
     AutomationService

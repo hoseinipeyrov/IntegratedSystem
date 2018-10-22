@@ -17,7 +17,7 @@
                 <mat-list role="list" *ngFor="let menuItem of menu.menuItems">
                     <mat-list-item role="listitem" *ngIf="menuItem.status">
                         <a matLine [routerLink]="menuItem.link">
-                          <mat-icon>{{ menuItem.icon }}</mat-icon>
+                          <mat-icon *ngIf="menuItem.icon">{{ menuItem.icon }}</mat-icon>
                           {{ menuItem.title}}
                         </a>
                     </mat-list-item>
