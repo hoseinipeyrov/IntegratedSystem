@@ -6,38 +6,36 @@
   </mat-card-header>
   <mat-card-content>
     <form [formGroup]="formGroup">
-      <div>
-        <mat-form-field>
-          <input matInput 
-            #userName
-            formControlName="userName" 
-            placeholder="نام کاربری" 
-            type="text">
+      <div class="row">
+        <mat-form-field appearance="outline" class="col">
+          <mat-label>نام کاربری</mat-label>
+          <input matInput #userName formControlName="userName" type="text">
           <mat-icon matSuffix>person</mat-icon>
         </mat-form-field>
-        <div *ngIf="username.invalid && (username.dirty || username.touched)">
-            <span class="validation-error" *ngIf="username.errors.required">نام کاربری را وارد کنید</span>
-            <span class="validation-error" *ngIf="username.errors.minlength">نام کاربری باید حداقل {{username.errors.minlength.requiredLength}} کاراکتر باشد </span>
-        </div>
+        <!-- <div *ngIf="username.invalid && (username.dirty || username.touched)">
+          <span class="validation-error" *ngIf="username.errors.required">نام کاربری را وارد کنید</span>
+          <span class="validation-error" *ngIf="username.errors.minlength">نام کاربری باید حداقل
+            {{username.errors.minlength.requiredLength}} کاراکتر باشد </span>
+        </div> -->
       </div>
-      <div>
-        <mat-form-field>
-          <input matInput 
-            formControlName="password" 
-            placeholder="گذرواژه" 
-            [type]="!hidePassword ? 'password' : 'text'">
-          <mat-icon matSuffix  [ngStyle]="{'cursor':'pointer'}" (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility_off' :'visibility'}}</mat-icon>
+      <div class="row">
+        <mat-form-field appearance="outline" class="col">
+          <mat-label>گذرواژه</mat-label>
+          <input matInput formControlName="password" [type]="!hidePassword ? 'password' : 'text'">
+          <mat-icon matSuffix [ngStyle]="{'cursor':'pointer'}" (click)="hidePassword = !hidePassword">{{hidePassword ?
+            'visibility_off' :'visibility'}}</mat-icon>
         </mat-form-field>
-        <div *ngIf="password.invalid && (password.dirty || password.touched)">
+        <!-- <div *ngIf="password.invalid && (password.dirty || password.touched)">
           <span class="validation-error" *ngIf="password.errors.required">گذرواژه را وارد کنید</span>
-          <span class="validation-error" *ngIf="password.errors.minlength">گذر واژه باید حداقل {{password.errors.minlength.requiredLength}} کاراکتر باشد </span>
-        </div>
+          <span class="validation-error" *ngIf="password.errors.minlength">گذر واژه باید حداقل
+            {{password.errors.minlength.requiredLength}} کاراکتر باشد </span>
+        </div> -->
       </div>
     </form>
   </mat-card-content>
-  <mat-card-actions>
-    <button (click)="onSubmit()" [disabled]="isDisabled" mat-button color="primary">
-      <span>ورود کاربران</span>
-    </button>
+  <mat-card-actions class="row">
+      <button (click)="onSubmit()" [disabled]="isDisabled" mat-raised-button color="primary" class="col">
+        <span>ورود کاربران</span>
+      </button>
   </mat-card-actions>
 </mat-card>

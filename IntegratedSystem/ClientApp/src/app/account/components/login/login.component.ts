@@ -42,7 +42,10 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
 
-    if (this.formGroup.invalid) { return; }
+    if (this.formGroup.invalid) { 
+      this.snackBar.open("نام کاربری یا گذرواژه را بصورت صحیح وارد کنید",  null, { duration: 3000, direction: 'rtl'})
+      return; 
+    }
 
     this.isDisabled = true;
     this.authenticateSrvice.login(this.form.userName.value, this.form.password.value)

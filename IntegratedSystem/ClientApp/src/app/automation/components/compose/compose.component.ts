@@ -1,11 +1,8 @@
 import { ContactsComponent } from './../contacts/contacts.component';
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { Subject, Observable } from 'rxjs';
-import { min, filter, toArray } from 'rxjs/operators';
-import { max } from 'jalali-moment';
-import { MatSelect, MatInput, MatDialogRef, MatDialog } from '@angular/material';
-import { resource } from 'selenium-webdriver/http';
+import { MatDialog } from '@angular/material';
+import { Receivers } from 'src/app/_shared/_class/models';
 
 @Component({
   selector: 'app-compose',
@@ -30,7 +27,11 @@ export class ComposeComponent implements OnInit {
 
   title: string = 'ارسال نامه';
   form: FormGroup;
-  receiver: number[] = [];
+  receiver: Receivers = {
+    To : [],
+    CarbonCopy:[],
+    BlindCarbonCopy: [],
+  };
   config:any ={
     toolbarGroups:[],
     removeButtons: "",
@@ -40,7 +41,6 @@ export class ComposeComponent implements OnInit {
   
   ngOnInit() {
     this.config.toolbarGroups = [
-      //{ name: 'document', groups: ['mode', 'document', 'doctools'] },
       { name: 'clipboard', groups: ['clipboard', 'undo'] },
       { name: 'editing', groups: ['find', 'selection'] },
       { name: 'basicstyles', groups: ['basicstyles', 'cleanup'] },
@@ -49,19 +49,12 @@ export class ComposeComponent implements OnInit {
       '/',
       { name: 'styles' },
     ];
-  
-    // Remove some buttons provided by the standard plugins, which are
-    // not needed in the Standard(s) toolbar.
-    this.config.removeButtons = 'Underline,Subscript,Superscript';
-  
-    // Set the most common block elements.
+    
     this.config.format_tags = 'p;h1;h2;h3;pre';
   
-    // Simplify the dialog windows.
-    this.config.removeDialogTabs = 'image:advanced;link:advanced';
   }
 
-  openContact(){
+  selectReceivers(){
     let dialogRef = this.dialog.open(ContactsComponent,{
       width: '400px',
       disableClose: true,
@@ -69,6 +62,7 @@ export class ComposeComponent implements OnInit {
       data:{
         title: 'انتخاب گیرندگان',
         data: this.receiver,
+        type: 'TO'
       }
     });
 
@@ -79,20 +73,80 @@ export class ComposeComponent implements OnInit {
           
           if (!result) return;
 
-          let name:string[]=[];
-          let id: number[]=[];
-
-          (result.data as any[]).forEach(
-            t=> {
-              name.push(t.name);
-              id.push(t.id);
-            }
+          (result.data as Receivers).To.forEach(
+            t => this.receiver.To.push({ id: t.id,  name : t.name })
           );
 
-          this.receiver = id;
-          this.form.controls.receivers.setValue(name.join("، "));
-          
+          this.insertReceiversToBox(this.receiver);
         }
       );
   }
+
+  carbonCopyReceivers(){
+    let dialogRef = this.dialog.open(ContactsComponent,{
+      width: '400px',
+      disableClose: true,
+      direction: 'rtl',
+      data:{
+        title: 'انتخاب گیرندگان رونوشت',
+        data: this.receiver,
+        type: 'CC'
+      }
+    });
+
+    dialogRef.afterClosed()
+      .subscribe(
+
+        result =>{
+          
+          if (!result) return;
+
+          (result.data as Receivers).CarbonCopy.forEach(
+            t => this.receiver.CarbonCopy.push({ id: t.id,  name : t.name })
+          );
+          
+          this.insertReceiversToBox(this.receiver);
+        }
+      );
+  }
+
+  bilindCarbonCopyReceivers(){
+    let dialogRef = this.dialog.open(ContactsComponent,{
+      width: '400px',
+      disableClose: true,
+      direction: 'rtl',
+      data:{
+        title: 'انتخاب گیرندگان رونوشت مخفی',
+        data: this.receiver,
+        type: 'BCC'
+      }
+    });
+
+    dialogRef.afterClosed()
+      .subscribe(
+
+        result =>{
+          
+          if (!result) return;
+
+          (result.data as Receivers).BlindCarbonCopy.forEach(
+            t => this.receiver.BlindCarbonCopy.push({ id: t.id,  name : t.name })
+          );
+
+          this.insertReceiversToBox(this.receiver);
+        }
+      );
+  }
+
+  insertReceiversToBox(list:Receivers){
+
+    let items:string = "";
+
+    items = list.To.join('، ');
+    items += list.CarbonCopy.join('، ');
+    items += list.BlindCarbonCopy.join('، ');
+
+    this.form.controls.receivers.setValue(items);
+  }
+
 }

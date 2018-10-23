@@ -1,6 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import"../node_modules/bootstrap/dist/css/bootstrap-grid.css";
+
 @font-face {
     font-family: 'Yekan';
     src: url('./assets/yekan/Yekan.eot?#') format('eot'), 
@@ -25,7 +27,7 @@
         url('./assets/IranianSans/iranian-sans.woff')format('woff');
 }
 h1,h2,h3,h4,h5,h6,a,span,strong,label,input,button,div 
-.mat-tab-label, .mat-tab-link{
+.mat-tab-label, .mat-tab-link, .mat-calendar-table{
     font-family: 'Yekan','YekanNumber' !important;
 }
 a{
@@ -54,3 +56,16 @@ body::-webkit-scrollbar-thumb {
     margin-left: 10px;
     margin-right: 10px;
 }
+
+.mat-form-field-label {
+    overflow: unset !important;
+}
+
+.mat-form-field{
+    line-height: 1.510;
+    min-width: 33.333% !important;
+}
+
+.toolbar-fill-remaining-space {
+    flex: 1 1 auto;
+  }
