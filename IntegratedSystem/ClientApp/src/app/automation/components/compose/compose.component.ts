@@ -31,8 +31,34 @@ export class ComposeComponent implements OnInit {
   title: string = 'ارسال نامه';
   form: FormGroup;
   receiver: number[] = [];
-
+  config:any ={
+    toolbarGroups:[],
+    removeButtons: "",
+    format_tags: "",
+    removeDialogTabs:""
+  };
+  
   ngOnInit() {
+    this.config.toolbarGroups = [
+      //{ name: 'document', groups: ['mode', 'document', 'doctools'] },
+      { name: 'clipboard', groups: ['clipboard', 'undo'] },
+      { name: 'editing', groups: ['find', 'selection'] },
+      { name: 'basicstyles', groups: ['basicstyles', 'cleanup'] },
+      { name: 'paragraph', groups: ['list', 'indent', 'blocks', 'align', 'bidi'] },
+      { name: 'colors' },
+      '/',
+      { name: 'styles' },
+    ];
+  
+    // Remove some buttons provided by the standard plugins, which are
+    // not needed in the Standard(s) toolbar.
+    this.config.removeButtons = 'Underline,Subscript,Superscript';
+  
+    // Set the most common block elements.
+    this.config.format_tags = 'p;h1;h2;h3;pre';
+  
+    // Simplify the dialog windows.
+    this.config.removeDialogTabs = 'image:advanced;link:advanced';
   }
 
   openContact(){
