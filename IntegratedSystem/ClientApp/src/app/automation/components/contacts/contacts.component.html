@@ -1,16 +1,16 @@
 <h3 mat-dialog-title>{{dialogData.title}}</h3>
 <div mat-dialog-content>
-  <mat-form-field style="width: 100%">
-    <input #search matInput placeholder="جستجو..." (keyup)="filterList(search.value)">
+  <mat-form-field class="col">
+    <mat-label>جستجو...</mat-label>
+    <input #search matInput (keyup)="filterList(search.value)">
   </mat-form-field>
   <div style="overflow-y: auto; max-height: 300px; min-height: 300px;">
-    <mat-selection-list #contacts>
-      <mat-list-option #option 
-        *ngFor="let item of filtered" 
-        [value]="item.Value" 
-        [selected]=item.Selected 
-        (click)= "checkedItem(option.value, option.selected)">
-        <span>{{ item.Text }}</span>
+    <mat-selection-list class="col">
+      <mat-list-option #option *ngFor="let item of filtered" 
+        [value]="item.value" 
+        [selected]="item.selected"
+        (click)="checkedItem(option.value, option.selected)">
+        <span>{{ item.text }}</span>
       </mat-list-option>
     </mat-selection-list>
   </div>

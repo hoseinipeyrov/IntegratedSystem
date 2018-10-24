@@ -1,19 +1,19 @@
 
 export interface IContact{
-    Id: number;
-    Name: string;
+    id: number;
+    name: string;
 }
 
 export interface IListItem{
-    Value: string;
-    Text: string;
-    Selected: boolean;
+    value: string;
+    text: string;
+    selected: boolean;
 }
 
 export interface IReceivers {
-    To: { name: string, id: number }[];
-    CarbonCopy: { name: string, id: number }[];
-    BlindCarbonCopy: { name: string, id: number }[];
+    to: { name: string, id: number }[];
+    carbonCopy: { name: string, id: number }[];
+    blindCarbonCopy: { name: string, id: number }[];
 }
 
 export enum RecieverDialogType {

@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Services.Automation;
 using Services.Users;
 using ViewModels;
 using ViewModels.Automation;
@@ -16,10 +17,14 @@ namespace IntegratedSystem.Controllers.Automation
     public class AutomationController : ControllerBase
     {
         private readonly IUserService _userService;
+        private readonly IContactService _contactService;
 
-        public AutomationController(IUserService userService)
+        public AutomationController(
+            IUserService userService, 
+            IContactService contactService)
         {
             _userService = userService;
+            _contactService = contactService;
         }
 
 
@@ -56,16 +61,9 @@ namespace IntegratedSystem.Controllers.Automation
 
         public IEnumerable<ContactModel> GetContacts()
         {
-            var list = new List<ContactModel>
-            {
-                new ContactModel
-                {
-                    Id = 1,
-                    Name = "سعید احمدوند"
-                }
-            };
+            var contacts = _contactService.GetAll();
 
-            return list.AsEnumerable();
+            return contacts.AsEnumerable();
         }
     }
 }

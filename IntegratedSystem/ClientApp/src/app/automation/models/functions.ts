@@ -5,10 +5,9 @@ export function EditorConfig(){
     };
 
     config.toolbarGroups = [
-        { name: 'clipboard', groups: ['clipboard', 'undo'] },
-        { name: 'editing', groups: ['find', 'selection'] },
-        { name: 'basicstyles', groups: ['basicstyles', 'cleanup'] },
-        { name: 'paragraph', groups: ['list', 'indent', 'blocks', 'align', 'bidi'] },
+        { name: 'clipboard', groups: ['undo'] },
+        { name: 'basicstyles', groups: ['basicstyles'] },
+        { name: 'paragraph', groups: ['list', 'indent',  'align','bidi'] },
         { name: 'colors' },
         '/',
         { name: 'styles' },

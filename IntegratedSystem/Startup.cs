@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Services;
+using Services.Automation;
 using Services.Security;
 using Services.Users;
 using System.Text;
@@ -88,6 +89,7 @@ namespace IntegratedSystem
                 });
 
             services.AddScoped<IUserService, UserServices>();
+            services.AddScoped<IContactService, ContactService>();
             services.AddScoped<ITokenValidatorService, TokenValidatorService>();
         }
 

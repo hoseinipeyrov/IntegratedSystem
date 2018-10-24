@@ -13,84 +13,73 @@
         </ng-template>
         <div class="container">
 
-          <div class="row">
-            <button mat-button>
-              <mat-icon>send</mat-icon>
-            </button>
-            <button mat-button>
-              <mat-icon>attachment</mat-icon>
-            </button>
-          </div>
+          <form class="example-container" [formGroup]="form">
+            <div class="row">
 
-          <div class="content">
-            <form class="example-container" [formGroup]="form">
-              <div class="row">
+              <mat-form-field appearance="outline" class="col-4">
+                <mat-label>اولویت</mat-label>
+                <mat-select formControlName="priority">
+                  <mat-option [value]="0">عادی</mat-option>
+                  <mat-option [value]="1">فوری</mat-option>
+                  <mat-option [value]="2">خیلی فوری</mat-option>
+                  <mat-option [value]="3">آنی</mat-option>
+                </mat-select>
+              </mat-form-field>
 
-                <mat-form-field [ngStyle]="{'width':'100% !important'}" appearance="outline" class="col-4">
-                  <mat-label>اولویت</mat-label>
-                  <mat-select formControlName="priority">
-                    <mat-option [value]="0">عادی</mat-option>
-                    <mat-option [value]="1">فوری</mat-option>
-                    <mat-option [value]="2">خیلی فوری</mat-option>
-                    <mat-option [value]="3">آنی</mat-option>
-                  </mat-select>
-                </mat-form-field>
+              <mat-form-field appearance="outline" class="col-4">
+                <mat-label>طبقه بندی</mat-label>
+                <mat-select formControlName="isSecret">
+                  <mat-option [value]="0">عادی</mat-option>
+                  <mat-option [value]="1">محرمانه</mat-option>
+                  <mat-option [value]="2">خیلی محرمانه</mat-option>
+                  <mat-option [value]="3">سری</mat-option>
+                  <mat-option [value]="4">بکلی سری</mat-option>
+                </mat-select>
+              </mat-form-field>
 
-                <mat-form-field [ngStyle]="{'width':'100% !important'}" appearance="outline" class="col-4">
-                  <mat-label>طبقه بندی</mat-label>
-                  <mat-select formControlName="isSecret">
-                    <mat-option [value]="0">عادی</mat-option>
-                    <mat-option [value]="1">محرمانه</mat-option>
-                    <mat-option [value]="2">خیلی محرمانه</mat-option>
-                    <mat-option [value]="3">سری</mat-option>
-                    <mat-option [value]="4">بکلی سری</mat-option>
-                  </mat-select>
-                </mat-form-field>
+              <mat-form-field appearance="outline" class="col-4">
+                <mat-label>تاریخ اقدام</mat-label>
+                <input matInput [matDatepicker]="pickerTo" formControlName="followUpDate" readonly (click)="pickerTo.open()">
+                <mat-datepicker #pickerTo [disabled]="false"></mat-datepicker>
+              </mat-form-field>
 
-                <mat-form-field [ngStyle]="{'width':'100% !important', 'margin': '0px !important'}" appearance="outline"
-                  class="col-4">
-                  <mat-label>تاریخ اقدام</mat-label>
-                  <input matInput [matDatepicker]="pickerTo" formControlName="followUpDate" readonly (click)="pickerTo.open()">
-                  <mat-datepicker #pickerTo [disabled]="false"></mat-datepicker>
-                </mat-form-field>
+            </div>
 
-              </div>
+            <div class="row">
+              <mat-form-field appearance="outline" class="col">
+                <mat-label>گیرندگان</mat-label>
+                <input matInput formControlName="receivers" readonly>
+                <mat-icon matSuffix title="گیرندگان" style="cursor: pointer; color: green" [matMenuTriggerFor]="receivers">more_vert</mat-icon>
+              </mat-form-field>
 
-              <div class="row">
-                <mat-form-field [ngStyle]="{'width':'100%'}" appearance="outline" class="col">
-                  <mat-label>گیرندگان</mat-label>
-                  <input matInput formControlName="receivers" readonly>
-                  <mat-icon matSuffix title="گیرندگان" style="cursor: pointer; color: green" [matMenuTriggerFor]="receivers">more_vert</mat-icon>
-                </mat-form-field>
+              <mat-menu #receivers="matMenu">
+                <button mat-menu-item (click)="selectReceivers()">
+                  <mat-icon>people</mat-icon>
+                  <span>گیرندگان</span>
+                </button>
+                <button mat-menu-item (click)="carbonCopyReceivers()">
+                  <mat-icon>supervisor_account</mat-icon>
+                  <span>گیرندگان رونوشت</span>
+                </button>
+                <button mat-menu-item (click)="bilindCarbonCopyReceivers()">
+                  <mat-icon>people_outline</mat-icon>
+                  <span>گیرندگان رونوشت پنهان</span>
+                </button>
+              </mat-menu>
+            </div>
 
-                <mat-menu #receivers="matMenu">
-                  <button mat-menu-item (click)="selectReceivers()">
-                    <mat-icon>people</mat-icon>
-                    <span>گیرندگان</span>
-                  </button>
-                  <button mat-menu-item (click)="carbonCopyReceivers()">
-                    <mat-icon>supervisor_account</mat-icon>
-                    <span>گیرندگان رونوشت</span>
-                  </button>
-                  <button mat-menu-item (click)="bilindCarbonCopyReceivers()">
-                    <mat-icon>people_outline</mat-icon>
-                    <span>گیرندگان رونوشت پنهان</span>
-                  </button>
-                </mat-menu>
-              </div>
+            <div class="row">
+              <mat-form-field appearance="outline" class="col">
+                <mat-label>موضوع نامه</mat-label>
+                <input matInput formControlName="subject">
+              </mat-form-field>
+            </div>
 
-              <div class="row">
-                <mat-form-field [ngStyle]="{'width':'100%'}" appearance="outline" class="col">
-                  <mat-label>موضوع نامه</mat-label>
-                  <input matInput formControlName="subject">
-                </mat-form-field>
-              </div>
+            <div class="row">
+              <ck-editor [config]="editorConfig" language="en" [fullPage]="true" formControlName="message" class="col"></ck-editor>
+            </div>
+          </form>
 
-              <div class="row">
-                <ck-editor [config]="editorConfig" language="fa" [fullPage]="true" formControlName="message" class="col"></ck-editor>
-              </div>
-            </form>
-          </div>
         </div>
       </mat-tab>
 
@@ -99,8 +88,7 @@
           <span>ضمیمه ها</span>
         </ng-template>
         <div class="container">
-          <div class="toolbar"></div>
-          <div class="content"></div>
+          
         </div>
       </mat-tab>
     </mat-tab-group>

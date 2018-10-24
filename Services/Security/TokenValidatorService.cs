@@ -10,10 +10,6 @@ namespace Services.Security
 
     public class TokenValidatorService : ITokenValidatorService
     {
-        public TokenValidatorService()
-        {
-
-        }
         public Task ValidateAsync(TokenValidatedContext context)
         {
             return Task.CompletedTask;

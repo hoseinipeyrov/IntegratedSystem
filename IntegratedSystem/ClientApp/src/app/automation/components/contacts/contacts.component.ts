@@ -1,8 +1,10 @@
+import { IReceivers } from './../../models/models';
+import { map, first } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSelectionList, MatSnackBar } from '@angular/material';
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
-import { IListItem } from 'src/app/automation/models/models';
+import { IListItem, IContact, RecieverDialogType } from 'src/app/automation/models/models';
 import { AutomationService } from 'src/app/automation/services/automation.service';
-import { stringify } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-contacts',
@@ -11,40 +13,75 @@ import { stringify } from '@angular/compiler/src/util';
 })
 export class ContactsComponent implements OnInit {
 
-  @ViewChild("contacts") contacts: MatSelectionList;
-
-  private list: IListItem[];
-  private filtered: IListItem[];
-
+  @ViewChild("matSelection") matSelection: MatSelectionList;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) 
+    @Inject(MAT_DIALOG_DATA)
     public dialogData: any,
-    private automationService: AutomationService,
     public snackBar: MatSnackBar,
-    public dialogRef: MatDialogRef<ContactsComponent>) { }
+    public dialogRef: MatDialogRef<ContactsComponent>,
+    private automationService: AutomationService) { }
+
+  private contacts: IListItem[] = [];
+  private filtered: IListItem[] = [];
+  private selected: any[] = [];
+
 
   ngOnInit() {
+
     this.automationService.getContactslist()
-    .subscribe(
-      result=>{
-        result.forEach (item => {
-          this.list.push({
-            Value: String(item.Id),
-            Text: item.Name,
-            Selected: false
-          })
+      .subscribe(result => {
+
+        this.doInit();
+
+        console.log(this.selected);
+
+        result.forEach(t => {
+
+          this.contacts.push({
+            text: t.name,
+            value: String(t.id),
+            selected: this.selected.some(c => c.id == t.id)
+          });
+
+          this.filtered.push({
+            text: t.name,
+            value: String(t.id),
+            selected: this.selected.some(c => c.id == t.id)
+          });
+
         });
+
       });
   }
 
-  checkedItem(id: string, value: boolean) {
-    this.list.find(t => t.Value == id).Selected = value;
+  checkedItem(id: number, value: boolean) {
+
+    if (value) {
+      this.selected.push({ id: id })
+    }
+    else {
+      let item = this.selected.find(t => t.id === id);
+      this.selected.splice(item, 1);
+    }
+
+
+
   }
 
   filterList(val: string) {
-    val = val.toLowerCase();
-    this.filtered = this.list.filter(t => t.Text.toLowerCase().indexOf(val) === 0);
+
+    this.filtered = [];
+
+    this.contacts.filter(t => t.text.toLowerCase().indexOf(val.toLowerCase()) === 0)
+      .forEach(t => {
+        this.filtered.push({
+          text: t.text,
+          value: t.value,
+          selected: this.selected.some(c => c.id == parseInt(t.value))
+        })
+      });
+
   }
 
   onNoClick() {
@@ -52,6 +89,74 @@ export class ContactsComponent implements OnInit {
   }
 
   onYesClick() {
-    this.dialogRef.close();
+    this.dialogRef.close({
+      data: this.makeReciversList()
+    });
+  }
+
+  doInit() {
+
+    let old = this.dialogData.data as IReceivers;
+    let type = this.dialogData.type as RecieverDialogType;
+
+    switch (type) {
+      case RecieverDialogType.To:
+        old.to.forEach(t => {
+          this.selected.push({ id: t.id });
+        });
+        break;
+
+      case RecieverDialogType.Cc:
+        old.carbonCopy.forEach(t => {
+          this.selected.push({ id: t.id });
+        });
+        break;
+
+      case RecieverDialogType.Bcc:
+        old.blindCarbonCopy.forEach(t => {
+          this.selected.push({ id: t.id });
+        });
+        break;
+    }
+  }
+
+  makeReciversList(): IReceivers {
+
+    let type = this.dialogData.type as RecieverDialogType;
+    let usreSelection = this.dialogData.data as IReceivers;
+
+    switch (type) {
+      case RecieverDialogType.To:
+        usreSelection.to = [];
+        this.selected.forEach(t => {
+          usreSelection.to.push({
+            id: t.id,
+            name: this.contacts.find(c => parseInt(c.value) == t.id).text
+          })
+        });
+        break;
+
+      case RecieverDialogType.Cc:
+        usreSelection.carbonCopy = [];
+        this.selected.forEach(t => {
+          usreSelection.carbonCopy.push({
+            id: t.id,
+            name: this.contacts.find(c => parseInt(c.value) == t.id).text
+          })
+        });
+        break;
+
+      case RecieverDialogType.Bcc:
+        usreSelection.blindCarbonCopy = [];
+        this.selected.forEach(t => {
+          usreSelection.blindCarbonCopy.push({
+            id: t.id,
+            name: this.contacts.find(c => parseInt(c.value) == t.id).text
+          })
+        });
+        break;
+    }
+    
+    return usreSelection;
   }
 }

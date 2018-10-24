@@ -24,15 +24,16 @@ export class ComposeComponent implements OnInit {
 
     this.form.controls.priority.setValue(0);
     this.form.controls.isSecret.setValue(0);
+
   }
 
   title: string = 'ارسال نامه';
   form: FormGroup;
   editorConfig: any;
   receiver: IReceivers = {
-    To: [],
-    CarbonCopy: [],
-    BlindCarbonCopy: [],
+    to: [],
+    carbonCopy: [],
+    blindCarbonCopy: [],
   };
 
 
@@ -71,20 +72,24 @@ export class ComposeComponent implements OnInit {
 
           if (!result) return;
 
-
-
           let r = result.data as IReceivers;
 
-          r.To.forEach(
-            t => this.receiver.To.push({ id: t.id, name: t.name })
+          this.receiver = {
+            to: [],
+            carbonCopy: [],
+            blindCarbonCopy: []
+          };
+
+          r.to.forEach(
+            t => this.receiver.to.push({ id: t.id, name: t.name })
           );
 
-          r.CarbonCopy.forEach(
-            t => this.receiver.CarbonCopy.push({ id: t.id, name: t.name })
+          r.carbonCopy.forEach(
+            t => this.receiver.carbonCopy.push({ id: t.id, name: t.name })
           );
 
-          r.BlindCarbonCopy.forEach(
-            t => this.receiver.BlindCarbonCopy.push({ id: t.id, name: t.name })
+          r.blindCarbonCopy.forEach(
+            t => this.receiver.blindCarbonCopy.push({ id: t.id, name: t.name })
           );
 
           this.insertReceiversToBox(this.receiver);
@@ -94,7 +99,40 @@ export class ComposeComponent implements OnInit {
 
   insertReceiversToBox(list: IReceivers) {
 
-    
+    let str: string = "";
+
+    let act1 = (x = list.to) => {
+      let strTo: any[] = [];
+      x.forEach(t => {
+        strTo.push(t.name);
+      })
+
+      return strTo.join("، ");
+    };
+
+    let act2 = (x = list.carbonCopy) => {
+      let strTo: any[] = [];
+      x.forEach(t => {
+        strTo.push(t.name);
+      })
+
+      return strTo.join("، ");
+    }
+
+    let act3 = (x = list.blindCarbonCopy) => {
+      let strTo: any[] = [];
+      x.forEach(t => {
+        strTo.push(t.name);
+      })
+
+      return strTo.join("، ");
+    }
+
+    str += `[${act1(list.to)}], `;
+    str += `[${act2(list.carbonCopy)}], `;
+    str += `[${act3(list.blindCarbonCopy)}]`;
+
+    this.form.controls.receivers.setValue(str);
   }
 
 }
