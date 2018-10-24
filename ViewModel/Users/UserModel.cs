@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace Services.Users
+namespace ViewModels.Users
 {
-    public class User
+    public class UserModel
     {
         public int Id { get; set; }
         public string FirstName { get; set; }

@@ -9,33 +9,34 @@ using System.Security.Claims;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
+using ViewModels.Users;
 
 namespace Services.Users
 {
     public interface IUserService
     {
-        User GetUser(int id);
-        User Login(string username, string password);
+        UserModel GetUser(int id);
+        UserModel Login(string username, string password);
     }
 
     public class UserServices : IUserService
     {
         private readonly AppSettings _appSettings;
 
-        private List<User> _user;
+        private List<UserModel> _user;
 
         public UserServices(IOptions<AppSettings> appSettings)
         {
             _appSettings = appSettings.Value;
-            _user = new List<User>
+            _user = new List<UserModel>
             {
-                new User{Id=1, FirstName="سعید", LastName="احمدوند" , UserName="saeed", Password="12345"},
-                new User{Id=2456, FirstName="وحید", LastName="احمدوند" , UserName="vahid", Password="12345"}
+                new UserModel{Id=1, FirstName="سعید", LastName="احمدوند" , UserName="saeed", Password="12345"},
+                new UserModel{Id=2456, FirstName="وحید", LastName="احمدوند" , UserName="vahid", Password="12345"}
             };
 
         }
 
-        public User GetUser(int id)
+        public UserModel GetUser(int id)
         {
             var user = _user.Find(t => t.Id == id);
 
@@ -45,7 +46,7 @@ namespace Services.Users
             return user;
         }
 
-        public User Login(string username, string password)
+        public UserModel Login(string username, string password)
         {
             try
             {
