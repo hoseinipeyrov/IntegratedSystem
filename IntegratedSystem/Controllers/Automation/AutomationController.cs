@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Services.Users;
 using ViewModels;
+using ViewModels.Automation;
 
 namespace IntegratedSystem.Controllers.Automation
 {
@@ -51,6 +52,20 @@ namespace IntegratedSystem.Controllers.Automation
 
                 }
             };
+        }
+
+        public IEnumerable<ContactModel> GetContacts()
+        {
+            var list = new List<ContactModel>
+            {
+                new ContactModel
+                {
+                    Id = 1,
+                    Name = "سعید احمدوند"
+                }
+            };
+
+            return list.AsEnumerable();
         }
     }
 }

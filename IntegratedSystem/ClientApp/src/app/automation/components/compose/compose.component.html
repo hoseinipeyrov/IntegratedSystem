@@ -21,7 +21,7 @@
               <mat-icon>attachment</mat-icon>
             </button>
           </div>
-          
+
           <div class="content">
             <form class="example-container" [formGroup]="form">
               <div class="row">
@@ -69,11 +69,11 @@
                     <span>گیرندگان</span>
                   </button>
                   <button mat-menu-item (click)="carbonCopyReceivers()">
-                      <mat-icon>people_outline</mat-icon>
+                    <mat-icon>supervisor_account</mat-icon>
                     <span>گیرندگان رونوشت</span>
                   </button>
                   <button mat-menu-item (click)="bilindCarbonCopyReceivers()">
-                    <mat-icon>supervisor_account</mat-icon>
+                    <mat-icon>people_outline</mat-icon>
                     <span>گیرندگان رونوشت پنهان</span>
                   </button>
                 </mat-menu>
@@ -87,7 +87,7 @@
               </div>
 
               <div class="row">
-                <ck-editor [config]="config" language="fa" [fullPage]="true" formControlName="message" class="col"></ck-editor>
+                <ck-editor [config]="editorConfig" language="fa" [fullPage]="true" formControlName="message" class="col"></ck-editor>
               </div>
             </form>
           </div>

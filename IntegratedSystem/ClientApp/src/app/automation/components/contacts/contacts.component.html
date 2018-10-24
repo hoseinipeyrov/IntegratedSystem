@@ -5,12 +5,12 @@
   </mat-form-field>
   <div style="overflow-y: auto; max-height: 300px; min-height: 300px;">
     <mat-selection-list #contacts>
-      <mat-list-option #option *ngFor="let item of filtered" 
-        [value]="item.id" 
-        [selected]=item.selected 
+      <mat-list-option #option 
+        *ngFor="let item of filtered" 
+        [value]="item.Value" 
+        [selected]=item.Selected 
         (click)= "checkedItem(option.value, option.selected)">
-
-        <span>{{ item.name }}</span>
+        <span>{{ item.Text }}</span>
       </mat-list-option>
     </mat-selection-list>
   </div>

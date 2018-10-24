@@ -26,14 +26,11 @@ export class AutomationComponent implements OnInit {
         this.options = result;
       },
       error =>{
-        let message:string = "";
+        let message:string =  `ظاهراً خطایی رخ داده است. (کد خطا: ${error.status})`;
 
-        if (!error.error)
-          message = error.error.message;
-
-        else
-          message = `ظاهراً خطایی رخ داده است. (کد خطا: ${error.status})`;
-
+        if (error.error && error.error.message){
+            message = error.error.message;
+        }
 
         this.snackBar.open(message,null,{ duration:3000, direction: 'rtl' });
       }
