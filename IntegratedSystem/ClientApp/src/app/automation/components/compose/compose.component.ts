@@ -128,9 +128,14 @@ export class ComposeComponent implements OnInit {
       return strTo.join("، ");
     }
 
-    str += `[${act1(list.to)}], `;
-    str += `[${act2(list.carbonCopy)}], `;
-    str += `[${act3(list.blindCarbonCopy)}]`;
+    if (list.to.length > 0)
+      str += `[${act1(list.to)}]`;
+    
+    if (list.carbonCopy.length > 0)
+      str += `[${act2(list.carbonCopy)}]`;
+
+    if (list.blindCarbonCopy.length > 0)
+      str += `[${act3(list.blindCarbonCopy)}]`;
 
     this.form.controls.receivers.setValue(str);
   }

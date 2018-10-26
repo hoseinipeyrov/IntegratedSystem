@@ -33,23 +33,23 @@ export class ContactsComponent implements OnInit {
       .subscribe(result => {
 
         this.doInit();
-
-        console.log(this.selected);
-
+        console.log(this.dialogData.data);
         result.forEach(t => {
 
-          this.contacts.push({
-            text: t.name,
-            value: String(t.id),
-            selected: this.selected.some(c => c.id == t.id)
-          });
+          if (this.checkList(t))
+          {
+            this.contacts.push({
+              text: t.name,
+              value: String(t.id),
+              selected: this.selected.some(c => c.id == t.id)
+            });
 
-          this.filtered.push({
-            text: t.name,
-            value: String(t.id),
-            selected: this.selected.some(c => c.id == t.id)
-          });
-
+            this.filtered.push({
+              text: t.name,
+              value: String(t.id),
+              selected: this.selected.some(c => c.id == t.id)
+            });
+          }
         });
 
       });
@@ -64,9 +64,7 @@ export class ContactsComponent implements OnInit {
       let item = this.selected.find(t => t.id === id);
       this.selected.splice(item, 1);
     }
-
-
-
+    
   }
 
   filterList(val: string) {
@@ -158,5 +156,35 @@ export class ContactsComponent implements OnInit {
     }
     
     return usreSelection;
+  }
+
+  checkList(contact: IContact): boolean{
+
+    let type = this.dialogData.type as RecieverDialogType;
+    let old = this.dialogData.data as IReceivers;
+
+    switch (type) {
+      case RecieverDialogType.To:{
+        let foundA:boolean = old.carbonCopy.some(t=> t.id == contact.id);
+        let foundB:boolean = old.blindCarbonCopy.some(t=> t.id == contact.id);
+
+        return !(foundA || foundB);
+      }
+
+      case RecieverDialogType.Cc:{
+        let foundA:boolean = old.to.some(t=> t.id == contact.id);
+        let foundB:boolean = old.blindCarbonCopy.some(t=> t.id == contact.id);
+
+        return !(foundA || foundB);
+      }
+      case RecieverDialogType.Bcc:{
+        let foundA:boolean = old.to.some(t=> t.id == contact.id);
+        let foundB:boolean = old.carbonCopy.some(t=> t.id == contact.id);
+
+        return !(foundA || foundB);
+      }
+    }
+
+    throw("error");
   }
 }

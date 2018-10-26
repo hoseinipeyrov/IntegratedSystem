@@ -14,10 +14,13 @@ namespace IntegratedSystem.Controllers.Automation
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class AutomationController : ControllerBase
+    public class AutomationController : Controller
     {
         private readonly IUserService _userService;
         private readonly IContactService _contactService;
+
+        [ActionContext]
+        public ActionContext actionContext { get; set; }
 
         public AutomationController(
             IUserService userService, 
@@ -61,6 +64,7 @@ namespace IntegratedSystem.Controllers.Automation
 
         public IEnumerable<ContactModel> GetContacts()
         {
+            var a = actionContext.HttpContext.User.Claims;
             var contacts = _contactService.GetAll();
 
             return contacts.AsEnumerable();
