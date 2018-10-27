@@ -24,7 +24,7 @@
           <form class="example-container" [formGroup]="form">
             <div class="row">
 
-              <mat-form-field appearance="outline" class="col-4">
+              <mat-form-field appearance="outline" class="col-4 col-xs-12">
                 <mat-label>اولویت</mat-label>
                 <mat-select formControlName="priority">
                   <mat-option [value]="0">عادی</mat-option>
@@ -34,7 +34,7 @@
                 </mat-select>
               </mat-form-field>
 
-              <mat-form-field appearance="outline" class="col-4">
+              <mat-form-field appearance="outline" class="col-4 col-xs-12">
                 <mat-label>طبقه بندی</mat-label>
                 <mat-select formControlName="isSecret">
                   <mat-option [value]="0">عادی</mat-option>
@@ -45,7 +45,7 @@
                 </mat-select>
               </mat-form-field>
 
-              <mat-form-field appearance="outline" class="col-4">
+              <mat-form-field appearance="outline" class="col-4 col-xs-12">
                 <mat-label>تاریخ اقدام</mat-label>
                 <input matInput [matDatepicker]="pickerTo" formControlName="followUpDate" readonly (click)="pickerTo.open()">
                 <mat-datepicker #pickerTo [disabled]="false"></mat-datepicker>

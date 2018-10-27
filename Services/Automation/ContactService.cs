@@ -32,16 +32,16 @@ namespace Services.Automation
         {
             var list = new List<ContactModel>
             {
-                new ContactModel { Id = 1, Name = "سعید احمدوند" },
-                new ContactModel { Id = 2, Name = "محسن زارع نژاد" },
-                new ContactModel { Id = 3, Name = "امیر مهدی پور" },
-                new ContactModel { Id = 4, Name = "علیرضا شلت" },
-                new ContactModel { Id = 5, Name = "علی قمر نژاد" },
-                new ContactModel { Id = 6, Name = "وحید غلامی" },
-                new ContactModel { Id = 7, Name = "کامیار علامی" },
-                new ContactModel { Id = 8, Name = "امید سجادی" },
-                new ContactModel { Id = 9, Name = "رضا هاشمی" },
-                new ContactModel { Id = 10, Name = "محمود آذر" },
+                new ContactModel { Id = 1, Name = "کاربر 1" },
+                new ContactModel { Id = 2, Name = "کاربر 2" },
+                new ContactModel { Id = 3, Name = "کاربر 3" },
+                new ContactModel { Id = 4, Name = "کاربر 4" },
+                new ContactModel { Id = 5, Name = "کاربر 5" },
+                new ContactModel { Id = 6, Name = "کاربر 6" },
+                new ContactModel { Id = 7, Name = "کاربر 7" },
+                new ContactModel { Id = 8, Name = "کاربر 8" },
+                new ContactModel { Id = 9, Name = "کاربر 9" },
+                new ContactModel { Id = 10, Name = "کاربر 10" },
             };
 
             return list;
