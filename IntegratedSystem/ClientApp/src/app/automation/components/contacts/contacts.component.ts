@@ -33,25 +33,20 @@ export class ContactsComponent implements OnInit {
       .subscribe(result => {
 
         this.doInit();
-        console.log(this.dialogData.data);
+        
         result.forEach(t => {
 
-          if (this.checkList(t))
-          {
+          if (!this.isExsist(t)) {
             this.contacts.push({
               text: t.name,
               value: String(t.id),
               selected: this.selected.some(c => c.id == t.id)
             });
-
-            this.filtered.push({
-              text: t.name,
-              value: String(t.id),
-              selected: this.selected.some(c => c.id == t.id)
-            });
           }
+          
         });
 
+        this.filtered = this.contacts;
       });
   }
 
@@ -71,13 +66,13 @@ export class ContactsComponent implements OnInit {
 
     this.filtered = [];
 
-    this.contacts.filter(t => t.text.toLowerCase().indexOf(val.toLowerCase()) === 0)
+    this.contacts.filter( t => t.text.toLowerCase().indexOf(val.toLowerCase()) === 0 )
       .forEach(t => {
         this.filtered.push({
           text: t.text,
           value: t.value,
           selected: this.selected.some(c => c.id == parseInt(t.value))
-        })
+        });
       });
 
   }
@@ -88,7 +83,7 @@ export class ContactsComponent implements OnInit {
 
   onYesClick() {
     this.dialogRef.close({
-      data: this.makeReciversList()
+      data: this.updateReceiversList()
     });
   }
 
@@ -118,7 +113,7 @@ export class ContactsComponent implements OnInit {
     }
   }
 
-  makeReciversList(): IReceivers {
+  updateReceiversList(): IReceivers {
 
     let type = this.dialogData.type as RecieverDialogType;
     let usreSelection = this.dialogData.data as IReceivers;
@@ -158,7 +153,7 @@ export class ContactsComponent implements OnInit {
     return usreSelection;
   }
 
-  checkList(contact: IContact): boolean{
+  isExsist(contact: IContact): boolean{
 
     let type = this.dialogData.type as RecieverDialogType;
     let old = this.dialogData.data as IReceivers;
@@ -168,20 +163,20 @@ export class ContactsComponent implements OnInit {
         let foundA:boolean = old.carbonCopy.some(t=> t.id == contact.id);
         let foundB:boolean = old.blindCarbonCopy.some(t=> t.id == contact.id);
 
-        return !(foundA || foundB);
+        return (foundA || foundB);
       }
 
       case RecieverDialogType.Cc:{
         let foundA:boolean = old.to.some(t=> t.id == contact.id);
         let foundB:boolean = old.blindCarbonCopy.some(t=> t.id == contact.id);
 
-        return !(foundA || foundB);
+        return (foundA || foundB);
       }
       case RecieverDialogType.Bcc:{
         let foundA:boolean = old.to.some(t=> t.id == contact.id);
         let foundB:boolean = old.carbonCopy.some(t=> t.id == contact.id);
 
-        return !(foundA || foundB);
+        return (foundA || foundB);
       }
     }
 

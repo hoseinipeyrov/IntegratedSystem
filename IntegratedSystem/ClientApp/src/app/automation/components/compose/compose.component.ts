@@ -140,4 +140,7 @@ export class ComposeComponent implements OnInit {
     this.form.controls.receivers.setValue(str);
   }
 
+  onReceiverInputChange(){
+    this.insertReceiversToBox(this.receiver);
+  }
 }
