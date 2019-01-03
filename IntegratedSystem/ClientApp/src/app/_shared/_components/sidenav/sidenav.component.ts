@@ -1,5 +1,4 @@
 import { Component, OnInit, NgZone, ViewChild, Input } from '@angular/core';
-import { MediaMatcher } from '@angular/cdk/layout';
 import { MatDrawer } from '@angular/material';
 import { Router } from '@angular/router';
 

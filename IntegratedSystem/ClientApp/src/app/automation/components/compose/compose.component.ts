@@ -14,6 +14,7 @@ export class ComposeComponent implements OnInit {
 
   constructor(private dialog: MatDialog, fb: FormBuilder) {
     this.form = fb.group({
+      attachment: new FormControl(""),
       followUpDate: new FormControl(""),
       isSecret: new FormControl("", Validators.required),
       message: new FormControl("", [Validators.required]),
@@ -105,7 +106,7 @@ export class ComposeComponent implements OnInit {
       let strTo: any[] = [];
       x.forEach(t => {
         strTo.push(t.name);
-      })
+      });
 
       return strTo.join("، ");
     };
@@ -114,7 +115,7 @@ export class ComposeComponent implements OnInit {
       let strTo: any[] = [];
       x.forEach(t => {
         strTo.push(t.name);
-      })
+      });
 
       return strTo.join("، ");
     }
@@ -123,7 +124,7 @@ export class ComposeComponent implements OnInit {
       let strTo: any[] = [];
       x.forEach(t => {
         strTo.push(t.name);
-      })
+      });
 
       return strTo.join("، ");
     }

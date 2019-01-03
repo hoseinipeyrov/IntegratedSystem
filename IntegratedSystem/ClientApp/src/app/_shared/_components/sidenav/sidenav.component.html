@@ -14,6 +14,7 @@
                 <mat-expansion-panel-header>
                     <span>{{menu.title}}</span>
                 </mat-expansion-panel-header>
+
                 <mat-list role="list" *ngFor="let menuItem of menu.menuItems">
                     <mat-list-item role="listitem" *ngIf="menuItem.status">
                         <a matLine [routerLink]="menuItem.link">
