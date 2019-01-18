@@ -52,7 +52,6 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\home\services\Get-Home.Service.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\_shared\_class\Interfaces.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\_shared\_helpers\JwtInterceptor.ts" />
   </ItemGroup>
 
