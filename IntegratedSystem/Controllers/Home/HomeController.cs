@@ -17,10 +17,11 @@ namespace IntegratedSystem.Controllers.Home {
         [HttpGet]
         public IActionResult Index () {
 
-            return Ok (new Settings {
+            return Ok(new Settings
+            {
                 AppTitle = "صفحه اصلی",
-                    ToolbarTitle = "دفتر مرکزی",
-                    Menus = null
+                ToolbarTitle = "دفتر مرکزی",
+                Menus = null
             });
         }
     }
